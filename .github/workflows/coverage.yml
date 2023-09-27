@@ -22,9 +22,16 @@ jobs:
 
       - name: Build and Test
         if: always()
-        run: mvn clean test
+        run: mvn -B package --file pom.xml                 
         continue-on-error: true    
-      
+
+      - name: Upload Report
+        uses: 'actions/upload-artifact@v3'
+        with:
+          name: jacoco-report
+          path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+
+
       - name: Add coverage to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
