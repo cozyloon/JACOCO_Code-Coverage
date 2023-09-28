@@ -4,9 +4,9 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-public class ResponseUtil {
+public final class ResponseUtil {
 
-    public Response getResponse() {
+    public static Response getResponse() {
 
         return RestAssured.given()
                 .baseUri("https://restful-booker.herokuapp.com/ping")
