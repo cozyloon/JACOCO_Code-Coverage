@@ -29,13 +29,17 @@ jobs:
         uses: 'actions/upload-artifact@v3'
         with:
           name: jacoco-report
-          path: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+          path: |
+            ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+            ${{ github.workspace }}/target/site/jacoco/index.html
        
       - name: Add coverage to PR
         id: jacoco
         uses: madrapps/jacoco-report@v1.6.1
         with:
-          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml         
+          paths: |
+            ${{ github.workspace }}/target/site/jacoco/jacoco.xml,
+            ${{ github.workspace }}/target/site/jacoco/index.html
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 60
@@ -43,16 +47,3 @@ jobs:
           update-comment: true
           pass-emoji: ':green_circle:'
           fail-emoji: ':red_circle:'
-
-      - name: Save Coverage To Environment Variable
-        run: |
-          echo "TOTAL_COVERAGE=${{ steps.jacoco.outputs.coverage-overall }}" >> $GITHUB_ENV
-          echo "CHANGED_FILES_COVERAGE=${{ steps.jacoco.outputs.coverage-changed-files }}" >> $GITHUB_ENV
-
-      - name: Print & Check Coverage Info
-        run: |
-          import os
-          import sys
-          print("Total Coverage: " + str(os.environ["TOTAL_COVERAGE"]))
-          print("Changed Files Coverage: " + str(os.environ["CHANGED_FILES_COVERAGE"]))
-     
