@@ -1,3 +1,3 @@
-# JACOCO Code Coverage Sample...
+# JaCoCo Code Coverage sample for Maven
 
-https://dev.to/aacitelli/github-actions-use-maven-jacoco-to-gate-pr-merging-by-code-coverage-4e5e
+![image](https://github.com/cozyloon/JaCoCo_Code-Coverage/assets/38062287/44bc8fe8-bf61-41bb-875e-7191bd8e27b7)
